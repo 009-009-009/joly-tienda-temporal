@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Helados</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFF200;
+            margin: 0;
+            padding: 25px;
+            color: #333;
+        }
+        .logo-joly {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+        header {
+    text-align: center;
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+        h1 {
+            color: #e31b23;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .aviso {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 14px;
+            border-radius: 10px;
+            background-color: #fff0c2;
+            font-size: 14px;
+        }
+
+        .familia {
+            margin-bottom: 40px;
+        }
+
+        .familia h2 {
+            color: #e31b23;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .productos {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 768px) {
+    .productos {
+        gap: 14px;
+    }
+}
+
+        .producto {
+            
+         background-color: #1976D2;
+            width: 250px;
+            padding: 12px;
+            border-radius: 18px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .producto img {
+            width: 100%;
+            height: 140px;
+            object-fit: contain;
+        }
+
+        .producto h3 {
+            color: white;
+            min-height: 35px;
+        }
+
+        .sabores {
+            font-size: 14px;
+            color: #666;
+            min-height: 30px;
+        }
+
+        .presentacion {
+            font-weight: bold;
+            color: white;
+        }
+
+        .precio {
+            font-size: 21px;
+            font-weight: bold;
+            color: #d63384;
+        }
+
+        .stock {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+             .referencia {
+            font-size: 12px;
+             color: white;
+        }
+
+        button {
+            background-color: #d63384;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #b52b70;
+        }
+
+        button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        #pedido {
+            margin: 40px auto;
+            max-width: 750px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        #pedido h2 {
+            text-align: center;
+            color: #6f42c1;
+        }
+
+        .item-pedido {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.item-pedido > div:first-child {
+    flex: 1;
+}
+
+.item-pedido > .controles {
+    width: 90px;
+    justify-content: center;
+}
+
+.item-pedido > div:last-child {
+    width: 90px;
+    text-align: right;
+}
+
+        .controles {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .controles button {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .cantidad {
+            font-weight: bold;
+            min-width: 25px;
+        }
+
+        #total {
+            text-align: right;
+            font-size: 25px;
+            font-weight: bold;
+            color: #d63384;
+            margin-top: 20px;
+        }
+                   #cliente {
+            margin: 30px auto;
+            padding: 20px;
+            max-width: 700px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+         #datosFactura {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f8f8ff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+        #cliente h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #cliente label {
+            font-weight: bold;
+        }
+
+        #cliente input,
+        #cliente textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        #cliente {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 20px;
+        }
+
+        #cliente h2 {
+            grid-column: 1 / 3;
+        }
+
+        #cliente label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #cliente input {
+            display: block;
+        }
+
+        #cliente textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+        .vacio {
+            text-align: center;
+            color: #777;
+        }
+        /* ==================== PEDIDO CONFIRMADO ==================== */
+
+#pedidoConfirmado {
+    margin: 30px auto;
+    max-width: 650px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+#pedidoConfirmado h2 {
+    text-align: center;
+    color: #e31b23;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#resumenPedidoConfirmado {
+    background-color: #f8f8ff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 18px;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+#botonWhatsApp {
+    display: block !important;
+    width: fit-content !important;
+    margin: 20px auto 0 !important;
+    background-color: #d63384 !important;
+    color: white !important;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#botonWhatsApp:hover {
+    background-color: #b52b70 !important;
+}
+ @media (max-width: 768px) {
+    header {
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+    }
+
+    .producto {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .producto button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+}
+    #pedido {
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 15px;
+    }
+        #cliente {
+        grid-template-columns: 1fr;
+    }
+
+    #cliente h2 {
+        grid-column: 1;
+    }
+        #pedidoConfirmado {
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    #resumenPedidoConfirmado {
+        padding: 12px;
+        font-size: 14px;
+    }
+        #botonWhatsApp {
+        width: 100% !important;
+        box-sizing: border-box;
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="logo_joly_recortado.png" alt="JOLY" class="logo-joly">
+        <h1>🍦 Helados Panda</h1>
+        <p>Catálogo de productos y presentaciones</p>
+        <div class="aviso">
+           Precios sujetos a actualización
+        </div>
+    </header>
+
+    <!-- ==================== AGUA ==================== -->
+
+    <section class="familia">
+        <h2>🍧 Helados de agua</h2>
+        <div class="productos" id="productos-agua"></div>
+    </section>
+
+    <!-- ==================== CREMA ==================== -->
+
+    <section class="familia">
+        <h2>🍦 Helados de crema</h2>
+        <div class="productos" id="productos-crema"></div>
+    </section>
+
+    <!-- ==================== CASSATAS ==================== -->
+
+    <section class="familia">
+        <h2>🍨 Cassatas</h2>
+        <div class="productos" id="productos-cassata"></div>
+    </section>
+
+    <!-- ==================== PEDIDO ==================== -->
+
+    <section id="pedido">
+        <h2>🛒 Mi pedido</h2>
+
+        <div id="listaPedido">
+            <p class="vacio">Tu pedido está vacío.</p>
+        </div>
+
+        <div id="total">
+            Total: $0
+        </div>
+        <button id="botonConfirmar" onclick="mostrarConfirmacion()">
+    ✅ Confirmar pedido
+</button>
+<button id="botonCancelar" onclick="cancelarPedido()">
+    ❌ Cancelar pedido
+</button>
+
+    </section>
+    
+
+<section id="cliente">
+    <h2>👤 Datos del cliente</h2>
+
+    <label>Nombre:</label>
+    <input type="text" id="nombreCliente">
+    <label>Apellido:</label>
+    <input type="text" id="apellidoCliente">
+
+    <label>Nombre del negocio:</label>
+    <input type="text" id="negocioCliente">
+
+    <label>Comuna / sector:</label>
+    <input type="text" id="sectorCliente">
+
+    <label>Dirección:</label>
+    <input type="text" id="direccionCliente">
+    <label>💳 Al recibir tu pedido, ¿cómo realizarás el pago?</label>
+
+<select id="formaPagoCliente">
+    <option value="efectivo">Efectivo</option>
+    <option value="transferencia">Transferencia</option>
+</select>
+
+    <label>¿Necesita factura?</label>
+
+    <select id="facturaCliente">
+        <option value="no">No</option>
+        <option value="si">Sí</option>
+    </select>
+
+    <div id="datosFactura">
+
+        <h3>🧾 Datos de facturación</h3>
+
+        <label>Razón social:</label>
+        <input type="text" id="razonSocial">
+
+        <label>RUT:</label>
+        <input type="text" id="rutCliente">
+
+        <label>Giro:</label>
+        <input type="text" id="giroCliente">
+
+        <label>
+    <input type="checkbox" id="mismaDireccion">
+    Misma dirección de despacho
+</label>
+
+<div id="direccionFacturacionDiferente">
+
+    <label>Dirección de facturación:</label>
+    <input type="text" id="direccionFactura">
+
+</div>
+
+    </div>
+
+    <textarea id="observacionesCliente" placeholder="Observaciones..."></textarea>
+</section>
+<section id="pedidoConfirmado" style="display: none;">
+
+    <h2>✅ Pedido confirmado</h2>
+
+    <div id="resumenPedidoConfirmado"></div>
+
+   <button id="botonWhatsApp" onclick="enviarPorWhatsApp()">
+    📱 Enviar pedido por WhatsApp
+
+</button>
+
+</section>
+
+<script src="productos.js"></script>
+
+<script>
+
+    
+
+        /*
+            STOCK FICTICIO PARA DEMOSTRACIÓN
+    
+            Agua = 15 cajas de cada producto
+            Crema = 5 cajas de cada producto
+            Cassatas = 5 cajas de cada producto
+        */
+
+
+     
+        
+         // ================================
+// CATÁLOGO TEMPORAL JOLY
+// ================================
+
+const productosTemporada = [
+
+    // ================= AGUA =================
+
+    {
+        id: "temp-lyn-naranja",
+        familia: "agua",
+        nombre: "Lyn - Naranja",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 7375,
+        precioUnidad: 175
+    },
+
+    {
+        id: "temp-lyn-frutilla",
+        familia: "agua",
+        nombre: "Lyn - Frutilla",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 7375,
+        precioUnidad: 175
+    },
+
+    {
+        id: "temp-yiro-papaya-frambuesa",
+        familia: "agua",
+        nombre: "Yiro - Papaya/Frambuesa",
+        imagen: "",
+        presentacion: "Caja de 44 unidades",
+        unidadesCaja: 44,
+        precioCaja: 7821,
+        precioUnidad: 177
+    },
+
+    {
+        id: "temp-yiro-uva-berries",
+        familia: "agua",
+        nombre: "Yiro - Uva/Berries",
+        imagen: "",
+        presentacion: "Caja de 44 unidades",
+        unidadesCaja: 44,
+        precioCaja: 7821,
+        precioUnidad: 177
+    },
+
+    {
+        id: "temp-yiro-limon-manzana",
+        familia: "agua",
+        nombre: "Yiro - Limón/Manzana",
+        imagen: "",
+        presentacion: "Caja de 44 unidades",
+        unidadesCaja: 44,
+        precioCaja: 7821,
+        precioUnidad: 177
+    },
+
+    {
+        id: "temp-dos-palos-frambuesa",
+        familia: "agua",
+        nombre: "2 Palos - Frambuesa",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 7819,
+        precioUnidad: 186
+    },
+
+    {
+        id: "temp-colo-colo-pina",
+        familia: "agua",
+        nombre: "Colo Colo - Piña",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 9916,
+        precioUnidad: 236
+    },
+
+    {
+        id: "temp-u-de-chile-pina",
+        familia: "agua",
+        nombre: "U. de Chile - Piña",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 9916,
+        precioUnidad: 236
+    },
+
+
+    // ================= CREMA =================
+
+    {
+        id: "temp-manjar-crocante",
+        familia: "crema",
+        nombre: "Manjar Crocante",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 13710,
+        precioUnidad: 326
+    },
+
+    {
+        id: "temp-choco-panda",
+        familia: "crema",
+        nombre: "Choco Panda",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 13711,
+        precioUnidad: 326
+    },
+
+    {
+        id: "temp-crema-frambuesa",
+        familia: "crema",
+        nombre: "Crema Frambuesa",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 8631,
+        precioUnidad: 205
+    },
+
+    {
+        id: "temp-chirimoya-alegre",
+        familia: "crema",
+        nombre: "Chirimoya Alegre",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 8631,
+        precioUnidad: 205
+    },
+
+    {
+        id: "temp-mora-mora",
+        familia: "crema",
+        nombre: "Mora Mora",
+        imagen: "",
+        presentacion: "Caja de 44 unidades",
+        unidadesCaja: 44,
+        precioCaja: 9642,
+        precioUnidad: 219
+    },
+
+    {
+        id: "temp-paleta-crema",
+        familia: "crema",
+        nombre: "Paleta Crema",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 12854,
+        precioUnidad: 306
+    },
+
+    {
+        id: "temp-paleta-cassata",
+        familia: "crema",
+        nombre: "Paleta Cassata",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 12844,
+        precioUnidad: 305
+    },
+
+    {
+        id: "temp-paleta-tunga",
+        familia: "crema",
+        nombre: "Paleta Tunga",
+        imagen: "",
+        presentacion: "Caja de 44 unidades",
+        unidadesCaja: 44,
+        precioCaja: 13467,
+        precioUnidad: 306
+    },
+
+    {
+        id: "temp-paleta-crema-fbsa",
+        familia: "crema",
+        nombre: "Paleta crema FBSA",
+        imagen: "",
+        presentacion: "Caja de 42 unidades",
+        unidadesCaja: 42,
+        precioCaja: 8631,
+        precioUnidad: 205
+    },
+
+
+    // ================= CHOCANTES =================
+
+    {
+        id: "temp-chocante-3-leches",
+        familia: "crema",
+        nombre: "Chocante Tres Leches",
+        imagen: "",
+        presentacion: "Caja de 16 unidades",
+        unidadesCaja: 16,
+        precioCaja: 7480,
+        precioUnidad: 467
+    },
+
+    {
+        id: "temp-chocante-frambuesa",
+        familia: "crema",
+        nombre: "Chocante Frambuesa",
+        imagen: "",
+        presentacion: "Caja de 16 unidades",
+        unidadesCaja: 16,
+        precioCaja: 7480,
+        precioUnidad: 467
+    },
+
+    {
+        id: "temp-chocante-chocolate",
+        familia: "crema",
+        nombre: "Chocante Chocolate",
+        imagen: "",
+        presentacion: "Caja de 16 unidades",
+        unidadesCaja: 16,
+        precioCaja: 7480,
+        precioUnidad: 467
+    },
+
+
+    // ================= CONO =================
+
+    {
+        id: "temp-cono-crema-frambuesa",
+        familia: "crema",
+        nombre: "Cono Crema/Frambuesa",
+        imagen: "",
+        presentacion: "Caja de 16 unidades",
+        unidadesCaja: 16,
+        precioCaja: 10887,
+        precioUnidad: 680
+    },
+
+
+    // ================= COPA =================
+
+    {
+        id: "temp-copa-crema-frambuesa",
+        familia: "crema",
+        nombre: "Copa Crema/Frambuesa",
+        imagen: "",
+        presentacion: "Caja de 12 unidades",
+        unidadesCaja: 12,
+        precioCaja: 8425,
+        precioUnidad: 702
+    },
+
+
+    // ================= CASSATAS 1 L =================
+
+    {
+        id: "temp-cassata-12-crema-frambuesa",
+        familia: "cassata",
+        nombre: "Cassata 1 L - Crema Frambuesa",
+        imagen: "",
+        presentacion: "Caja de 6 unidades",
+        unidadesCaja: 6,
+        precioCaja: 14536,
+        precioUnidad: 2422
+    },
+
+    {
+        id: "temp-cassata-12-frutos-bosque",
+        familia: "cassata",
+        nombre: "Cassata 1 L - Frutos del Bosque",
+        imagen: "",
+        presentacion: "Caja de 6 unidades",
+        unidadesCaja: 6,
+        precioCaja: 14536,
+        precioUnidad: 2422
+    },
+
+    {
+        id: "temp-cassata-12-chirimoya-alegre",
+        familia: "cassata",
+        nombre: "Cassata 1 L - Chirimoya Alegre",
+        imagen: "",
+        presentacion: "Caja de 6 unidades",
+        unidadesCaja: 6,
+        precioCaja: 14536,
+        precioUnidad: 2422
+    },
+
+    {
+        id: "temp-cassata-12-pina",
+        familia: "cassata",
+        nombre: "Cassata 1 L - Piña",
+        imagen: "",
+        presentacion: "Caja de 6 unidades",
+        unidadesCaja: 6,
+        precioCaja: 14536,
+        precioUnidad: 2422
+    },
+
+
+    // ================= CASSATAS 1,8 L =================
+
+    {
+        id: "temp-cassata-18-chocolate-menta-becker",
+        familia: "cassata",
+        nombre: "Cassata 1,8 L - Chocolate/Menta/Becker",
+        imagen: "",
+        presentacion: "Caja de 4 unidades",
+        unidadesCaja: 4,
+        precioCaja: 16240,
+        precioUnidad: 4060
+    },
+
+    {
+        id: "temp-cassata-18-cassata",
+        familia: "cassata",
+        nombre: "Cassata 1,8 L - Cassata",
+        imagen: "",
+        presentacion: "Caja de 4 unidades",
+        unidadesCaja: 4,
+        precioCaja: 16240,
+        precioUnidad: 4060
+    },
+
+    {
+        id: "temp-cassata-18-trisabor",
+        familia: "cassata",
+        nombre: "Cassata 1,8 L - Trisabor",
+        imagen: "",
+        presentacion: "Caja de 4 unidades",
+        unidadesCaja: 4,
+        precioCaja: 16240,
+        precioUnidad: 4060
+    }
+
+];
+        // Carrito:
+        // id del producto -> cantidad de cajas
+        const carrito = {};
+        let pedidoConfirmado = null;
+
+        function formatoPrecio(valor) {
+            return "$" + valor.toLocaleString("es-CL");
+        }
+
+        function crearTarjetas() {
+
+    productosTemporada.forEach(producto => {
+
+        const contenedor = document.getElementById(
+            "productos-" + producto.familia
+        );
+
+        const tarjeta = document.createElement("div");
+        tarjeta.className = "producto";
+
+        tarjeta.innerHTML = `
+        <img src="${producto.imagen || ""}" alt="${producto.nombre}">
+        <h3>${producto.nombre}</h3>
+
+        <p class="presentacion">
+            ${producto.presentacion}
+        </p>
+
+        <p class="precio">
+            ${formatoPrecio(producto.precioCaja)}
+        </p>
+
+        <p class="referencia">
+            Referencia: ${formatoPrecio(producto.precioUnidad)} c/u
+        </p>
+
+        <button
+            id="boton-${producto.id}"
+            onclick="agregarProducto('${producto.id}')">
+            Agregar al pedido
+        </button>
+    `;
+
+        contenedor.appendChild(tarjeta);
+    });
+}
+
+        function agregarProducto(id) {
+
+  
+
+    if (!carrito[id]) {
+        carrito[id] = 0;
+    }
+
+    carrito[id]++;
+
+    actualizarProducto(id);
+    mostrarPedido();
+}
+
+        function quitarProducto(id) {
+
+            if (!carrito[id] || carrito[id] <= 0) {
+                return;
+            }
+
+            carrito[id]--;
+            
+
+            if (carrito[id] === 0) {
+                delete carrito[id];
+            }
+
+            actualizarProducto(id);
+            mostrarPedido();
+        }
+
+      function actualizarProducto(id) {
+
+   
+    const boton = document.getElementById("boton-" + id);
+
+    
+
+    if (carrito[id]) {
+        boton.textContent =
+            "✓ Agregado · " + carrito[id];
+    } else {
+        boton.textContent = "Agregar al pedido";
+    }
+
+    boton.disabled = false;
+}
+
+     function mostrarPedido() {
+
+    const lista = document.getElementById("listaPedido");
+
+    lista.innerHTML = "";
+
+    const ids = Object.keys(carrito);
+
+    if (ids.length === 0) {
+
+        lista.innerHTML =
+            '<p class="vacio">Tu pedido está vacío.</p>';
+
+        document.getElementById("total").textContent =
+            "Total: $0";
+
+        return;
+    }
+
+    let total = 0;
+
+    ids.forEach(id => {
+
+        const producto = productosTemporada.find(p => p.id === id);
+        const cantidad = carrito[id];
+
+        const subtotal = producto.precioCaja * cantidad;
+        total += subtotal;
+
+        const item = document.createElement("div");
+        item.className = "item-pedido";
+
+        item.innerHTML = `
+        <div>
+            <strong>${producto.nombre}</strong><br>
+            ${formatoPrecio(producto.precioCaja)} por caja
+        </div>
+
+        <div class="controles">
+
+            <button onclick="quitarProducto('${producto.id}')">
+                −
+            </button>
+
+            <span class="cantidad">
+                ${cantidad}
+            </span>
+
+            <button onclick="agregarProducto('${producto.id}')">
+                +
+            </button>
+
+        </div>
+
+        <div>
+            ${formatoPrecio(subtotal)}
+        </div>
+    `;
+
+        lista.appendChild(item);
+    });
+
+    document.getElementById("total").textContent =
+        "Total: " + formatoPrecio(total);
+}
+     function cancelarPedido() {
+
+    const ids = Object.keys(carrito);
+
+    if (ids.length === 0) {
+        alert("No hay ningún pedido para cancelar.");
+        return;
+    }
+
+    const confirmar = confirm(
+        "¿Estás segura de que deseas cancelar el pedido?"
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    for (const id of ids) {
+        delete carrito[id];
+    }
+    for (const id of ids) {
+    actualizarProducto(id);
+}
+
+    mostrarPedido();
+
+    alert("Pedido cancelado.");
+}
+ function crearMensajeWhatsApp() {
+
+    let mensaje =
+       "JOLY — PEDIDO\n\n";
+    mensaje +=
+        "CLIENTE: " + pedidoConfirmado.nombre + " " + pedidoConfirmado.apellido + "\n" +
+"NEGOCIO: " + pedidoConfirmado.negocio + "\n" +
+"SECTOR: " + pedidoConfirmado.sector + "\n" +
+"DIRECCIÓN: " + pedidoConfirmado.direccion + "\n\n";
+
+    pedidoConfirmado.productos.forEach(producto => {
+
+        mensaje +=
+            producto.cantidad +
+            (producto.cantidad === 1 ? " caja · " : " cajas · ") +
+            producto.nombre +
+            " — " +
+            formatoPrecio(producto.subtotal) +
+            "\n";
+    });
+
+    mensaje +=
+    "\nTOTAL " +
+    formatoPrecio(pedidoConfirmado.total) +
+    "\n" +
+    "FORMA DE PAGO: " +
+    (pedidoConfirmado.formaPago === "efectivo" ? "Efectivo" : "Transferencia") +
+    "\n";
+
+    if (pedidoConfirmado.observaciones) {
+        mensaje +=
+            "\nOBSERVACIÓN: " +
+            pedidoConfirmado.observaciones +
+            "\n";
+    }
+
+    if (pedidoConfirmado.necesitaFactura === "si") {
+
+        mensaje +=
+            "\nFACTURA\n" +
+            "Razón social: " +
+            pedidoConfirmado.factura.razonSocial +
+            "\n" +
+            "RUT: " +
+            pedidoConfirmado.factura.rut +
+            "\n" +
+            "Giro: " +
+            pedidoConfirmado.factura.giro +
+            "\n" +
+            "Dirección: " +
+            pedidoConfirmado.factura.direccion +
+            "\n";
+    }
+
+    return mensaje;
+}
+ function mostrarPedidoConfirmado() {
+
+    const resumen = document.getElementById("resumenPedidoConfirmado");
+    const seccion = document.getElementById("pedidoConfirmado");
+
+   let texto =
+    "Cliente: " + pedidoConfirmado.nombre + " " + pedidoConfirmado.apellido + "\n" +
+    "Negocio: " + pedidoConfirmado.negocio + "\n" +
+    "Sector: " + pedidoConfirmado.sector + "\n" +
+    "Dirección: " + pedidoConfirmado.direccion + "\n" +
+    "Forma de pago: " +
+(pedidoConfirmado.formaPago === "efectivo" ? "Efectivo" : "Transferencia") +
+"\n\n";
+if (pedidoConfirmado.observaciones) {
+    texto +=
+        "🔴 *OBSERVACIONES*: " +
+        pedidoConfirmado.observaciones +
+        "\n\n";
+}
+
+    texto += "PRODUCTOS\n\n";
+
+    pedidoConfirmado.productos.forEach(producto => {
+
+        texto +=
+            "• " +
+            producto.cantidad +
+            (producto.cantidad === 1 ? " caja " : " cajas ") +
+            producto.nombre +
+            " — " +
+            formatoPrecio(producto.subtotal) +
+            "\n";
+    });
+
+    texto +=
+        "\nTOTAL: " +
+        formatoPrecio(pedidoConfirmado.total);
+
+    if (pedidoConfirmado.necesitaFactura === "si") {
+
+        texto +=
+            "\n\n🧾 FACTURA\n\n" +
+            "Razón social: " +
+            pedidoConfirmado.factura.razonSocial +
+            "\n" +
+            "RUT: " +
+            pedidoConfirmado.factura.rut +
+            "\n" +
+            "Giro: " +
+            pedidoConfirmado.factura.giro +
+            "\n" +
+            "Dirección de facturación: " +
+            pedidoConfirmado.factura.direccion;
+    }
+
+    resumen.textContent = texto;
+    seccion.style.display = "block";
+    seccion.scrollIntoView({ behavior: "smooth" });
+}
+ function enviarPorWhatsApp() {
+
+    if (!pedidoConfirmado) {
+        alert("Primero debes confirmar un pedido.");
+        return;
+    }
+
+    const mensaje = crearMensajeWhatsApp();
+
+    const url =
+        "https://wa.me/56995769200?text=" +
+        encodeURIComponent(mensaje);
+
+    window.open(url, "_blank");
+}
+        function mostrarConfirmacion() {
+
+    const ids = Object.keys(carrito);
+
+    if (ids.length === 0) {
+        alert("Tu pedido está vacío. Agrega al menos un producto para continuar.");
+        return;
+    }
+
+    const nombre = document.getElementById("nombreCliente").value.trim();
+    const apellido = document.getElementById("apellidoCliente").value.trim();
+    const negocio = document.getElementById("negocioCliente").value.trim();
+    const sector = document.getElementById("sectorCliente").value.trim();
+    const direccion = document.getElementById("direccionCliente").value.trim();
+   
+    if (!nombre || !apellido || !negocio || !sector || !direccion) {
+    alert("Completa tus datos de cliente para continuar.");
+    return;
+}
+
+const necesitaFactura = document.getElementById("facturaCliente").value;
+
+if (necesitaFactura === "si") {
+
+    const razonSocial = document.getElementById("razonSocial").value.trim();
+    const rut = document.getElementById("rutCliente").value.trim();
+    const giro = document.getElementById("giroCliente").value.trim();
+
+    if (!razonSocial || !rut || !giro) {
+        alert("Completa todos los datos de facturación para continuar.");
+        return;
+    }
+
+    const mismaDireccion = document.getElementById("mismaDireccion").checked;
+
+    if (!mismaDireccion) {
+
+        const direccionFactura =
+            document.getElementById("direccionFactura").value.trim();
+
+        if (!direccionFactura) {
+            alert("Completa la dirección de facturación para continuar.");
+            return;
+        }
+    }
+}
+
+comprobarStock();
+}
+ function comprobarStock() {
+
+    const ids = Object.keys(carrito);
+    
+
+    for (const id of ids) {
+
+      
+    }
+if (confirm("¿Confirmas este pedido?")) {
+    const necesitaFactura = document.getElementById("facturaCliente").value;
+const formaPago = document.getElementById("formaPagoCliente").value;
+
+let datosFacturaPedido = null;
+
+if (necesitaFactura === "si") {
+
+    const mismaDireccion =
+        document.getElementById("mismaDireccion").checked;
+
+    datosFacturaPedido = {
+        razonSocial: document.getElementById("razonSocial").value.trim(),
+        rut: document.getElementById("rutCliente").value.trim(),
+        giro: document.getElementById("giroCliente").value.trim(),
+        direccion: mismaDireccion
+            ? document.getElementById("direccionCliente").value.trim()
+            : document.getElementById("direccionFactura").value.trim()
+    };
+}
+    pedidoConfirmado = {
+    productos: Object.keys(carrito).map(id => {
+
+        const producto = productosTemporada.find(p => p.id === id);
+
+        return {
+            nombre: producto.nombre,
+            cantidad: carrito[id],
+            precio: producto.precioCaja,
+            subtotal: producto.precioCaja * carrito[id]
+        };
+    }),
+
+    nombre: document.getElementById("nombreCliente").value.trim(),
+    apellido: document.getElementById("apellidoCliente").value.trim(),
+    negocio: document.getElementById("negocioCliente").value.trim(),
+    sector: document.getElementById("sectorCliente").value.trim(),
+    direccion: document.getElementById("direccionCliente").value.trim(),
+    observaciones: document.getElementById("observacionesCliente").value.trim(),
+    formaPago: formaPago,
+    necesitaFactura: necesitaFactura,
+    factura: datosFacturaPedido,
+
+    total: Object.keys(carrito).reduce((suma, id) => {
+        const producto = productosTemporada.find(p => p.id === id);
+        return suma + (producto.precioCaja * carrito[id]);
+    }, 0)
+};
+       
+        for (const id of ids) {
+        delete carrito[id];
+    }
+    for (const id of ids) {
+    actualizarProducto(id);
+}
+
+    mostrarPedido();
+
+    alert("¡Pedido confirmado!");
+    mostrarPedidoConfirmado();
+}
+}
+                const facturaCliente = document.getElementById("facturaCliente");
+        const datosFactura = document.getElementById("datosFactura");
+
+        function mostrarDatosFactura() {
+
+            if (facturaCliente.value === "si") {
+                datosFactura.style.display = "block";
+            } else {
+                datosFactura.style.display = "none";
+            }
+        }
+
+        facturaCliente.addEventListener("change", mostrarDatosFactura);
+
+        mostrarDatosFactura();
+        const mismaDireccion = document.getElementById("mismaDireccion");
+const direccionFacturacionDiferente = document.getElementById("direccionFacturacionDiferente");
+
+function mostrarDireccionFactura() {
+
+    if (mismaDireccion.checked) {
+        direccionFacturacionDiferente.style.display = "none";
+    } else {
+        direccionFacturacionDiferente.style.display = "block";
+    }
+}
+
+mismaDireccion.addEventListener("change", mostrarDireccionFactura);
+
+mostrarDireccionFactura();
+        crearTarjetas();
+        mostrarPedido();
+
+    </script>
+
+</body>
+
+</html>
